@@ -89,10 +89,10 @@ function SelectionManager() {
 				if (cell && cellIsAllDay(cell)) {
 				    if (t.calendar.getView().name=="resourceDay") {
 				        // return the date of the first column
-				        dates = [ cellDate({col: 0,row: 0}), cellDate({col: 0,row: 0}) ].sort(cmp);
-				        // use virtuell-date to render the right selection
-				        vdates = [ cellDate(origCell), cellDate(cell) ].sort(cmp);
-				        renderSelection(vdates[0], vdates[1], true);
+				        var that_date = cellDate({col: 0,row: 0});
+				        dates = [ that_date, that_date ];
+				        // use last selected date to render the right selection
+				        renderSelection(cellDate(cell), cellDate(cell), true);
 				    } else {
 				        dates = [ cellDate(origCell), cellDate(cell) ].sort(cmp);
 				        renderSelection(dates[0], dates[1], true);
