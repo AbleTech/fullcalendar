@@ -87,8 +87,16 @@ function SelectionManager() {
 			hoverListener.start(function(cell, origCell) { // TODO: maybe put cellDate/cellIsAllDay info in cell
 				clearSelection();
 				if (cell && cellIsAllDay(cell)) {
-					dates = [ cellDate(origCell), cellDate(cell) ].sort(cmp);
-					renderSelection(dates[0], dates[1], true);
+				    if (t.calendar.getView().name=="resourceDay") {
+				        // return the date of the first column
+				        var that_date = cellDate({col: 0,row: 0});
+				        dates = [ that_date, that_date ];
+				        // use last selected date to render the right selection
+				        renderSelection(cellDate(cell), cellDate(cell), true);
+				    } else {
+				        dates = [ cellDate(origCell), cellDate(cell) ].sort(cmp);
+				        renderSelection(dates[0], dates[1], true);
+				    }
 				}else{
 					dates = null;
 				}
