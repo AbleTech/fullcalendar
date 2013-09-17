@@ -40,7 +40,7 @@ $.fn.fullCalendar = function(options) {
 	var eventResources = options.eventResources || [];
 	delete options.eventResources;
 	if (options.resources) {
-		eventResources = options.resources;
+		eventResources = (typeof(options.resources) == 'function' ? options.resources() : options.resources);
 		delete options.resources;
 	}
 
